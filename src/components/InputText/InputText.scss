@@ -1,0 +1,15 @@
+@import "src/styles/text";
+
+.input_text {
+	color: var(--FG_9);
+
+	&:first-child {
+		@extend .text_14;
+		margin-bottom: 8px;
+	}
+
+	&:last-child {
+		@extend .text_13;
+		margin-top: 8px;
+	}
+}

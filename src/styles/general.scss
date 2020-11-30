@@ -1,0 +1,51 @@
+:root {
+	--BG_0: #FFFFFF;
+	--BG_1: #EBEDF0;
+	--BG_2: #D7D9DB;
+	--BG_8: #373738;
+	--BG_9: #1E1E1F;
+
+	--FG_0: #FFFFFF;
+	--FG_3: #C1C2C4;
+	--FG_4: #9C9D9E;
+	--FG_5: #838385;
+	--FG_6: #696A6B;
+	--FG_9: #1E1E1F;
+
+	--TC_5: #186EF0;
+	--TC_6: #1562D6;
+	--TC_7: #1357BD;
+
+	--RED: #EB3F2F;
+	--YEL: #F2BC18;
+	--GRN: #2BD948;
+}
+
+// Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+	font-family: "Inter", sans-serif;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	-webkit-font-smoothing: antialiased;
+	height: 100%;
+	scroll-behavior: smooth;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	color: var(--FG_9);
+}
+
+a {
+	text-decoration: none;
+	color: unset;
+}
+
+@import "text";

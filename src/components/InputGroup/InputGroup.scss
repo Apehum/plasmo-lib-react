@@ -1,0 +1,35 @@
+.input_group {
+	&._error {
+		.input_large {
+			padding: 8px 16px;
+			border: 2px solid var(--RED);
+		}
+
+		.input_normal {
+			padding: 6px 11px;
+			border: 2px solid var(--RED);
+		}
+
+		.input_text:last-child {
+			color: var(--RED);
+		}
+	}
+
+	&._disabled:not(._error) {
+		.input {
+			pointer-events: none;
+			user-select: none;
+			border-color: var(--BG_2);
+			color: var(--FG_3);
+
+			&::placeholder {
+				color: var(--FG_3);
+			}
+		}
+
+		.input_text {
+			user-select: none;
+			color: var(--FG_3);
+		}
+	}
+}

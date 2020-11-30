@@ -1,0 +1,78 @@
+.button {
+	display: inline-block;
+	outline: none;
+	border: none;
+	transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+	cursor: pointer;
+	user-select: none;
+
+	/* Sizes */
+	&.button_14 {
+		padding: 11px 21px;
+		border-radius: 8px;
+	}
+
+	&.button_16 {
+		padding: 13px 23px;
+		border-radius: 8px;
+	}
+
+	&.button_18 {
+		padding: 16px 31px 14px; // почему падинги в фигме отличаются от кода - останется секретом на века, либо я просто долбоеб Pepega
+		border-radius: 10px;
+	}
+}
+
+.button_main {
+	background-color: var(--TC_5);
+	color: var(--FG_0);
+	border: 1px solid var(--TC_5);
+
+	&:hover {
+		background-color: var(--TC_6);
+		border-color: var(--TC_6);
+	}
+
+	&:active {
+		background-color: var(--TC_7);
+		border-color: var(--TC_7);
+	}
+
+	&:disabled, &._disabled {
+		cursor: default;
+		color: var(--FG_3);
+		border-color: var(--FG_3);
+	}
+}
+
+.button_main_alt {
+	@extend .button_main;
+	background-color: transparent;
+	color: var(--TC_5);
+
+	&:hover {
+		color: var(--FG_0);
+	}
+
+	&:active {
+		color: var(--FG_0);
+	}
+}
+
+.button_secondary {
+	background-color: transparent;;
+	color: var(--FG_6);
+
+	&:hover {
+		background-color: var(--BG_1);
+	}
+
+	&:active {
+		background-color: var(--BG_2);
+	}
+
+	&:disabled, &._disabled {
+		cursor: default;
+		color: var(--FG_3);
+	}
+}
