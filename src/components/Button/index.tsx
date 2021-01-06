@@ -36,7 +36,7 @@ const Button = ({
 	href,
 	text,
 }: Props) => {
-	size = size || ButtonSize.NORMAL;
+	size = size === undefined ? ButtonSize.NORMAL : size;
 
 	return (
 		<a
