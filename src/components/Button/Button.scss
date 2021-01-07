@@ -5,19 +5,21 @@
 	transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 	cursor: pointer;
 	user-select: none;
-	border-radius: 6px;
 
 	/* Sizes */
 	&.button_14 {
 		padding: 9px 19px;
+		border-radius: 6px;
 	}
 
 	&.button_16 {
 		padding: 11px 21px;
+		border-radius: 8px;
 	}
 
 	&.button_18 {
 		padding: 14px 27px 12px; // почему падинги в фигме отличаются от кода - останется секретом на века, либо я просто долбоеб Pepega
+		border-radius: 10px;
 	}
 }
 
