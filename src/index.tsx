@@ -6,7 +6,7 @@ export { ButtonStyle, ButtonSize } from "./components/Button";
 
 export { default as InputGroup } from "./components/InputGroup";
 export { default as Input, InputSize } from "./components/Input";
-export { default as InputText } from "./components/InputText";
+export { default as InputText, InputTextSize } from "./components/InputText";
 
 export { default as AutoMomentum } from "./components/AutoMomentum";
 
