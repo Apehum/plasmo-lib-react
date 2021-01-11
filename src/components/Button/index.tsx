@@ -43,8 +43,8 @@ const Button = ({
 			className={`button ${styleToCSS[style]} ${sizeToCSS[size!]}${
 				className ? ` ${className}` : ""
 			}${disabled ? ` _disabled` : ""}`}
-			onClick={onClick}
-			href={href}
+			onClick={!disabled ? onClick : undefined}
+			href={!disabled ? href : undefined}
 		>
 			{text}
 		</a>
