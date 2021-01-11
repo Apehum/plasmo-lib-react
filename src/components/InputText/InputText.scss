@@ -3,6 +3,14 @@
 .input_text {
 	color: var(--FG_9);
 
+	&:first-child {
+		margin-bottom: 8px;
+	}
+
+	&:last-child {
+		margin-top: 8px;
+	}
+
 	&._small {
 		@extend .text_13;
 	}
