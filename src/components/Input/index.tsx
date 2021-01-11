@@ -26,7 +26,7 @@ const Input: FunctionComponent<Props> = ({
 	placeholder,
 	size,
 }) => {
-	size = size || InputSize.NORMAL;
+	size = size === undefined ? InputSize.NORMAL : size;
 
 	return (
 		<TestContext.Consumer>

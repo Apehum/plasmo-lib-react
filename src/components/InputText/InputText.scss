@@ -3,13 +3,11 @@
 .input_text {
 	color: var(--FG_9);
 
-	&:first-child {
-		@extend .text_14;
-		margin-bottom: 8px;
+	&._small {
+		@extend .text_13;
 	}
 
-	&:last-child {
-		@extend .text_13;
-		margin-top: 8px;
+	&._normal {
+		@extend .text_14;
 	}
 }

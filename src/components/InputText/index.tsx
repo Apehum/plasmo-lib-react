@@ -2,12 +2,22 @@ import React, { FunctionComponent } from "react";
 import "./InputText.scss";
 
 type Props = {
+	size?: InputTextSize,
 	className?: string,
 };
 
-const InputText: FunctionComponent<Props> = ({ children, className }) => {
+export enum InputTextSize {
+	SMALL,
+	NORMAL,
+}
+
+const sizeToCSS = ["_small", "_normal"];
+
+const InputText: FunctionComponent<Props> = ({ size, children, className }) => {
+	size = size === undefined ? InputTextSize.NORMAL : size;
+
 	return (
-		<p className={`input_text${className ? ` ${className}` : ""}`}>
+		<p className={`input_text ${sizeToCSS[size!]}${className ? ` ${className}` : ""}`}>
 			{children}
 		</p>
 	);
