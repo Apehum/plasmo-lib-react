@@ -39,6 +39,7 @@
 	}
 
 	&:disabled, &._disabled {
+		background-color: transparent;
 		cursor: default;
 		color: var(--FG_3);
 		border-color: var(--FG_3);
