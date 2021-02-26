@@ -29,11 +29,11 @@
 
 .input_normal {
 	@extend .text_14;
-	padding: 7px 12px;
+	padding: 7px 13px;
 	border-radius: 6px;
 
 	&:focus {
-		padding: 6px 11px;
+		padding: 6px 12px;
 	}
 }
 
