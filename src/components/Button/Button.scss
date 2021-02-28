@@ -50,6 +50,7 @@
 	@extend .button_main;
 	background-color: transparent;
 	color: var(--TC_5);
+	border: 1px solid transparent;
 
 	&:hover {
 		color: var(--FG_0);
@@ -63,6 +64,7 @@
 .button_secondary {
 	background-color: transparent;;
 	color: var(--FG_5);
+	border: 1px solid transparent;
 
 	&:hover {
 		background-color: var(--BG_1);
