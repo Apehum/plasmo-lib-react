@@ -29,8 +29,10 @@ const InputGroup: FunctionComponent<Props> = ({
 		>
 			<TestContext.Provider
 				value={{
-					groupOnChange: () => {
-						setError(false);
+					groupOnChange: (value) => {
+						if(value) {
+							setError(false);
+						}
 					},
 				}}
 			>
