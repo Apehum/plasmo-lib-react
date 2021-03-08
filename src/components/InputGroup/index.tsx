@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import "./InputGroup.scss";
 
 type Props = {
@@ -20,6 +20,10 @@ const InputGroup: FunctionComponent<Props> = ({
 	disabled,
 }) => {
 	const [err, setError] = useState(error || false);
+
+	useEffect(() => {
+		setError(!!error)
+	}, [error]);
 
 	return (
 		<div
