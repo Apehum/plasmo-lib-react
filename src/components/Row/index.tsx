@@ -1,13 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactHTMLElement } from "react";
 import "./Row.scss";
 
-type Props = {
-	className?: string;
-};
-
-const Row: FunctionComponent<Props> = ({ children, className }) => {
+const Row: FunctionComponent<ReactHTMLElement<HTMLDivElement>> = ({props, children}) => {
 	return (
-		<div className={`row${className ? ` ${className}` : ""}`}>
+		<div {...props} className={`row${props.className ? ` ${props.className}` : ""}`}>
 			{children}
 		</div>
 	);
