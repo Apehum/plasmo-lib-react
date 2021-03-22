@@ -10,6 +10,7 @@ type Props = {
 
 export type Context = {
 	groupOnChange?: (value: string) => void;
+	readOnly?: boolean;
 };
 
 export const TestContext = React.createContext<Context | undefined>(undefined);
@@ -22,10 +23,15 @@ const InputGroup: FunctionComponent<Props> = ({
 	readOnly,
 }) => {
 	const [err, setError] = useState(error || false);
+	const [rOnly, setReadOnly] = useState(error || false);
 
 	useEffect(() => {
 		setError(!!error)
 	}, [error]);
+
+	useEffect(() => {
+		setReadOnly(!!readOnly)
+	}, [readOnly]);
 
 	return (
 		<div
@@ -40,6 +46,7 @@ const InputGroup: FunctionComponent<Props> = ({
 							setError(false);
 						}
 					},
+					readOnly: rOnly
 				}}
 			>
 				{children}

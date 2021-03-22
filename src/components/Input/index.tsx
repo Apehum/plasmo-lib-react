@@ -30,7 +30,7 @@ const Input: FunctionComponent<Props> = ({
 
 	return (
 		<TestContext.Consumer>
-			{({ groupOnChange }: Context) => (
+			{({ groupOnChange, readOnly }: Context) => (
 				<input
 					type={type}
 					placeholder={placeholder}
@@ -38,6 +38,7 @@ const Input: FunctionComponent<Props> = ({
 						className ? ` ${className}` : ""
 					}`}
 					value={value}
+					readOnly={readOnly}
 					onChange={(e) => {
 						groupOnChange!(e.target.value);
 						if (onChange) {
