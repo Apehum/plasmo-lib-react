@@ -19,11 +19,13 @@
 		.input {
 			pointer-events: none;
 			cursor: default;
+			user-select: none;
 		}
 	}
 
 	&._disabled:not(._error) {
 		.input {
+			cursor: pointer;
 			pointer-events: none;
 			user-select: none;
 			border-color: var(--BG_2);
