@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Momentum } from "../..";
+import { Momentum } from "../../utils/momentum";
 
 type PropsStart = {
 	date: Date;
