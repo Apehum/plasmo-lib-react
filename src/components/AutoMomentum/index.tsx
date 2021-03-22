@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Momentum } from "../..";
 
-type Props = {
+type PropsStart = {
 	date: Date;
 };
 
 const momentum = new Momentum();
 
-const Start = ({ date }: Props) => {
+const Start = ({ date }: PropsStart) => {
 	const [autoMomentum, setAutoMomentum] = useState(momentum.startOf(date));
 	let interval: NodeJS.Timeout;
 
@@ -54,7 +54,12 @@ const Start = ({ date }: Props) => {
 	return <React.Fragment>{autoMomentum}</React.Fragment>;
 };
 
-const End = ({ date }: Props) => {
+type PropsEnd = {
+	date: Date;
+	onEnd?: () => void
+};
+
+const End = ({ date, onEnd }: PropsEnd) => {
 	const [autoMomentum, setAutoMomentum] = useState(momentum.endOf(date));
 	let interval: NodeJS.Timeout;
 
@@ -62,7 +67,12 @@ const End = ({ date }: Props) => {
 		const duration = momentum.endOfDuration(date);
 
 		if (duration < 86400) {
-			if (duration < 60) {
+			if(duration === 0) {
+				if(onEnd) {
+					onEnd();
+				}
+				setAutoMomentum("");
+			} if (duration < 60) {
 				interval = setInterval(() => {
 					setAutoMomentum(momentum.endOf(date));
 
