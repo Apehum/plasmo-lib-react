@@ -102,8 +102,10 @@ export class Momentum {
 		const nowTime = Math.round(now.getTime() / 1000);
 		const dateTime = Math.round(date.getTime() / 1000);
 
-		const duration = nowTime - dateTime;
-		if (duration < 60) {
+		const duration = dateTime > nowTime ? dateTime - nowTime : 0;
+		if(duration === 0) {
+			return "";
+		} else if (duration < 60) {
 			return `${this.language.after} ${this.language.few} ${this.language.secondsAgo[2]}`;
 		} else if (duration < 3600) {
 			const minutes = Math.floor(duration / 60);
