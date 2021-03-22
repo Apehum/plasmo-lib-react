@@ -4,6 +4,7 @@ import "./InputGroup.scss";
 type Props = {
 	error?: boolean;
 	disabled?: boolean;
+	readOnly?: boolean
 	className?: string;
 };
 
@@ -18,6 +19,7 @@ const InputGroup: FunctionComponent<Props> = ({
 	className,
 	error,
 	disabled,
+	readOnly,
 }) => {
 	const [err, setError] = useState(error || false);
 
@@ -29,7 +31,7 @@ const InputGroup: FunctionComponent<Props> = ({
 		<div
 			className={`input_group${className ? ` ${className}` : ""}${
 				err ? " _error" : ""
-			}${disabled ? " _disabled" : ""}`}
+			}${disabled ? " _disabled" : ""}${readOnly ? " _read_only" : ""}`}
 		>
 			<TestContext.Provider
 				value={{

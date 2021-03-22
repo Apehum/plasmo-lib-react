@@ -15,6 +15,13 @@
 		}
 	}
 
+	&._read_only:not(._error) {
+		.input {
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+
 	&._disabled:not(._error) {
 		.input {
 			pointer-events: none;
