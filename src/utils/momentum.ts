@@ -89,4 +89,62 @@ export class Momentum {
 			)} ${this.language.ago}`;
 		}
 	}
+
+	endOfDuration(date: Date): number {
+		const nowTime = Math.round(new Date().getTime() / 1000);
+		const dateTime = Math.round(date.getTime() / 1000);
+
+		return dateTime > nowTime ? dateTime - nowTime : 0;
+	}
+
+	endOf(date: Date): string {
+		const now = new Date();
+		const nowTime = Math.round(now.getTime() / 1000);
+		const dateTime = Math.round(date.getTime() / 1000);
+
+		const duration = nowTime - dateTime;
+		if (duration < 60) {
+			return `${this.language.after} ${this.language.few} ${this.language.secondsAgo[2]}`;
+		} else if (duration < 3600) {
+			const minutes = Math.floor(duration / 60);
+			return `${this.language.after} ${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
+				minutes,
+				this.language.minutesAgo,
+			)}`;
+		} else if (duration < 86400) {
+			const hours = Math.floor(duration / 3600);
+			return `${this.language.after} ${hours > 1 ? `${hours} ` : ""}${formatNumberCases(
+				hours,
+				this.language.hoursAgo,
+			)}`;
+		} else if (duration < 604800) {
+			const days = Math.floor(duration / 86400);
+			if (days === 1) {
+				return this.language.yesterday;
+			} else {
+				return `${this.language.after} ${days} ${formatNumberCases(
+					days,
+					this.language.daysAgo,
+				)}`;
+			}
+		} else if (duration < 2592000) {
+			const weeks = Math.floor(duration / 604800);
+			return `${this.language.after} ${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
+				weeks,
+				this.language.weeksAgo,
+			)}`;
+		} else if (duration < 31536000) {
+			const weeks = Math.floor(duration / 2592000);
+			return `${this.language.after} ${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
+				weeks,
+				this.language.monthsAgo,
+			)}`;
+		} else {
+			const years = Math.floor(duration / 31536000);
+			return `${this.language.after} ${years > 1 ? `${years} ` : ""}${formatNumberCases(
+				years,
+				this.language.yearsAgo,
+			)}`;
+		}
+	}
 }

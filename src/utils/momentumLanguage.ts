@@ -1,5 +1,6 @@
 export type MomentumLanguage = {
 	few: string;
+	after: string;
 	ago: string;
 	yesterday: string;
 	secondsAgo: Array<string>;
@@ -15,6 +16,7 @@ export const momentumLanguages: Map<String, MomentumLanguage> = new Map();
 
 momentumLanguages.set("ru", {
 	few: "несколько",
+	after: "через",
 	ago: "назад",
 	yesterday: "вчера",
 	secondsAgo: ["секунду", "секунды", "секунд"],
