@@ -67,25 +67,23 @@ const End = ({ date, onEnd }: PropsEnd) => {
 		const duration = momentum.endOfDuration(date);
 
 		if (duration < 86400) {
-			if(duration === 0) {
-				if(onEnd) {
-					onEnd();
-				}
-				setAutoMomentum("");
-			} if (duration < 60) {
+			if (duration < 60) {
 				interval = setInterval(() => {
-					setAutoMomentum(momentum.endOf(date));
-
-					if (momentum.endOfDuration(date) > 60) {
+					const dur = momentum.endOfDuration(date);
+					if(dur === 0) {
+						if(onEnd) {
+							onEnd();
+						}
+						setAutoMomentum("");
 						clearInterval(interval);
-						calculateInterval();
 					}
+					setAutoMomentum(momentum.endOf(date));
 				}, 1000);
 			} else if (duration < 3600) {
 				interval = setInterval(() => {
 					setAutoMomentum(momentum.endOf(date));
 
-					if (momentum.endOfDuration(date) > 3600) {
+					if (momentum.endOfDuration(date) <= 60) {
 						clearInterval(interval);
 						calculateInterval();
 					}
@@ -93,6 +91,10 @@ const End = ({ date, onEnd }: PropsEnd) => {
 			} else {
 				interval = setInterval(() => {
 					setAutoMomentum(momentum.endOf(date));
+					if (momentum.endOfDuration(date) <= 3600) {
+						clearInterval(interval);
+						calculateInterval();
+					}
 				}, 3600000);
 			}
 		}
