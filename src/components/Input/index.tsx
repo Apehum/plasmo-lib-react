@@ -1,15 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React, { AllHTMLAttributes, FunctionComponent } from "react";
 import "./Input.scss";
 import { Context, TestContext } from "../InputGroup";
 
-type Props = {
+interface Props extends AllHTMLAttributes<HTMLInputElement> {
 	size?: InputSize;
-	value?: string;
-	onChange?: (value: string) => void;
 	type?: string;
-	className?: string;
-	placeholder?: string;
-};
+}
 
 export enum InputSize {
 	NORMAL,
@@ -18,31 +14,23 @@ export enum InputSize {
 
 const sizeToCSS = ["input_normal", "input_large"];
 
-const Input: FunctionComponent<Props> = ({
-	className,
-	value,
-	onChange,
-	type,
-	placeholder,
-	size,
-}) => {
-	size = size === undefined ? InputSize.NORMAL : size;
+const Input: FunctionComponent<Props> = (props) => {
+	const size = props.size === undefined ? InputSize.NORMAL : props.size;
+	const type = props.type;
 
 	return (
 		<TestContext.Consumer>
-			{({ groupOnChange, readOnly }: Context) => (
+			{({ groupOnChange }: Context) => (
 				<input
+					{...props}
 					type={type}
-					placeholder={placeholder}
 					className={`input ${sizeToCSS[size!]}${
-						className ? ` ${className}` : ""
+						props.className ? ` ${props.className}` : ""
 					}`}
-					value={value}
-					readOnly={readOnly}
 					onChange={(e) => {
 						groupOnChange!(e.target.value);
-						if (onChange) {
-							onChange(e.target.value);
+						if(props.onChange) {
+							props.onChange(e);
 						}
 					}}
 				/>

@@ -69,8 +69,7 @@ const End = ({ date, onEnd }: PropsEnd) => {
 		if (duration < 86400) {
 			if (duration <= 60) {
 				interval = setInterval(() => {
-					const dur = momentum.endOfDuration(date);
-					if(dur === 0) {
+					if(momentum.endOfDuration(date) === 0) {
 						if(onEnd) {
 							onEnd();
 						}
