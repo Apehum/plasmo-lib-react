@@ -1,8 +1,8 @@
-import React, { AllHTMLAttributes, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import "./Input.scss";
 import { Context, TestContext } from "../InputGroup";
 
-interface Props extends AllHTMLAttributes<HTMLInputElement> {
+interface Props extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
 	size?: InputSize;
 	type?: string;
 }
