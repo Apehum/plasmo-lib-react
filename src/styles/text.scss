@@ -75,6 +75,11 @@ h6 {
 	font-weight: 500;
 }
 
+.text_16_sbold {
+	@extend .text_16;
+	font-weight: 600;
+}
+
 /* 18px */
 .text_18 {
 	font-size: 18px;
