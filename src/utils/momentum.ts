@@ -106,6 +106,59 @@ export class Momentum {
 		if(duration === 0) {
 			return "";
 		} else if (duration < 60) {
+			return `${this.language.few} ${this.language.secondsAgo[2]}`;
+		} else if (duration < 3600) {
+			const minutes = Math.floor(duration / 60);
+			return `${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
+				minutes,
+				this.language.minutesAgo,
+			)}`;
+		} else if (duration < 86400) {
+			const hours = Math.floor(duration / 3600);
+			return `${hours > 1 ? `${hours} ` : ""}${formatNumberCases(
+				hours,
+				this.language.hoursAgo,
+			)}`;
+		} else if (duration < 604800) {
+			const days = Math.floor(duration / 86400);
+			if (days === 1) {
+				return this.language.yesterday;
+			} else {
+				return `${days} ${formatNumberCases(
+					days,
+					this.language.daysAgo,
+				)}`;
+			}
+		} else if (duration < 2592000) {
+			const weeks = Math.floor(duration / 604800);
+			return `${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
+				weeks,
+				this.language.weeksAgo,
+			)}`;
+		} else if (duration < 31536000) {
+			const weeks = Math.floor(duration / 2592000);
+			return `${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
+				weeks,
+				this.language.monthsAgo,
+			)}`;
+		} else {
+			const years = Math.floor(duration / 31536000);
+			return `${years > 1 ? `${years} ` : ""}${formatNumberCases(
+				years,
+				this.language.yearsAgo,
+			)}`;
+		}
+	}
+
+	endOfPrefix(date: Date): string {
+		const now = new Date();
+		const nowTime = Math.round(now.getTime() / 1000);
+		const dateTime = Math.round(date.getTime() / 1000);
+
+		const duration = dateTime > nowTime ? dateTime - nowTime : 0;
+		if(duration === 0) {
+			return "";
+		} else if (duration < 60) {
 			return `${this.language.after} ${this.language.few} ${this.language.secondsAgo[2]}`;
 		} else if (duration < 3600) {
 			const minutes = Math.floor(duration / 60);

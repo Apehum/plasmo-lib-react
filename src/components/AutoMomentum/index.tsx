@@ -56,11 +56,12 @@ const Start = ({ date }: PropsStart) => {
 
 type PropsEnd = {
 	date: Date;
-	onEnd?: () => void
+	prefix?: boolean;
+	onEnd?: () => void;
 };
 
-const End = ({ date, onEnd }: PropsEnd) => {
-	const [autoMomentum, setAutoMomentum] = useState(momentum.endOf(date));
+const End = ({ date, onEnd, prefix = true }: PropsEnd) => {
+	const [autoMomentum, setAutoMomentum] = useState(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
 	let interval: NodeJS.Timeout;
 
 	const calculateInterval = () => {
@@ -76,11 +77,11 @@ const End = ({ date, onEnd }: PropsEnd) => {
 						setAutoMomentum("");
 						clearInterval(interval);
 					}
-					setAutoMomentum(momentum.endOf(date));
+					setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
 				}, 1000);
 			} else if (duration < 3600) {
 				interval = setInterval(() => {
-					setAutoMomentum(momentum.endOf(date));
+					setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
 
 					if (momentum.endOfDuration(date) <= 60) {
 						clearInterval(interval);
@@ -89,7 +90,7 @@ const End = ({ date, onEnd }: PropsEnd) => {
 				}, 60000);
 			} else {
 				interval = setInterval(() => {
-					setAutoMomentum(momentum.endOf(date));
+					setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
 					if (momentum.endOfDuration(date) <= 3600) {
 						clearInterval(interval);
 						calculateInterval();
