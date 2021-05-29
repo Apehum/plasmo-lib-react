@@ -6,6 +6,20 @@
 	cursor: pointer;
 	user-select: none;
 
+	&._icons {
+		display: inline-flex;
+		align-items: center;
+
+		svg:first-child {
+			margin-right: 12px;
+
+			path {
+				transition: fill 150ms ease;
+				fill: var(--FG_0);
+			}
+		}
+	}
+
 	/* Sizes */
 	&.button_14 {
 		padding: 9px 19px;
@@ -43,6 +57,10 @@
 		cursor: default;
 		color: var(--FG_3);
 		border-color: var(--BG_2);
+
+		svg path {
+			fill: var(--FG_3);
+		}
 	}
 }
 
@@ -77,5 +95,9 @@
 	&:disabled, &._disabled {
 		cursor: default;
 		color: var(--FG_3);
+
+		svg path {
+			fill: var(--FG_3);
+		}
 	}
 }

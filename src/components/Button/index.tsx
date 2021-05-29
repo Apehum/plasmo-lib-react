@@ -19,34 +19,35 @@ const sizeToCSS = ["button_14", "button_16", "button_18"];
 
 type Props = {
 	style: ButtonStyle;
+	icons?: boolean;
 	size?: ButtonSize;
-	text: string;
 	className?: string;
 	href?: string;
 	disabled?: boolean;
 	onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
-const Button = ({
+const Button: React.FC<Props> = ({
 	style,
 	size,
 	className,
 	onClick,
 	disabled,
 	href,
-	text,
-}: Props) => {
+	children,
+	icons,
+}) => {
 	size = size === undefined ? ButtonSize.NORMAL : size;
 
 	return (
 		<a
-			className={`button ${styleToCSS[style]} ${sizeToCSS[size!]}${
+			className={`button ${icons ? ` _icons` : ""} ${styleToCSS[style]} ${sizeToCSS[size!]}${
 				className ? ` ${className}` : ""
 			}${disabled ? ` _disabled` : ""}`}
 			onClick={!disabled ? onClick : undefined}
 			href={!disabled ? href : undefined}
 		>
-			{text}
+			{children}
 		</a>
 	);
 };
