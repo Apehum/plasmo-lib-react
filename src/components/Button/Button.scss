@@ -10,13 +10,19 @@
 		display: inline-flex;
 		align-items: center;
 
-		svg:first-child {
-			margin-right: 12px;
-
+		svg {
 			path {
 				transition: fill 150ms ease;
 				fill: var(--FG_0);
 			}
+		}
+
+		svg:first-child {
+			margin-right: 12px;
+		}
+
+		svg:last-child {
+			margin-left: 12px;
 		}
 	}
 
