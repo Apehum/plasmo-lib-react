@@ -121,14 +121,10 @@ export class Momentum {
 			)}`;
 		} else if (duration < 604800) {
 			const days = Math.floor(duration / 86400);
-			if (days === 1) {
-				return this.language.yesterday;
-			} else {
-				return `${days} ${formatNumberCases(
-					days,
-					this.language.daysAgo,
-				)}`;
-			}
+			return `${days} ${formatNumberCases(
+				days,
+				this.language.daysAgo,
+			)}`;
 		} else if (duration < 2592000) {
 			const weeks = Math.floor(duration / 604800);
 			return `${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
@@ -174,14 +170,10 @@ export class Momentum {
 			)}`;
 		} else if (duration < 604800) {
 			const days = Math.floor(duration / 86400);
-			if (days === 1) {
-				return this.language.yesterday;
-			} else {
-				return `${this.language.after} ${days} ${formatNumberCases(
-					days,
-					this.language.daysAgo,
-				)}`;
-			}
+			return `${this.language.after} ${days} ${formatNumberCases(
+				days,
+				this.language.daysAgo,
+			)}`;
 		} else if (duration < 2592000) {
 			const weeks = Math.floor(duration / 604800);
 			return `${this.language.after} ${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
