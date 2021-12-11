@@ -11,6 +11,10 @@
 		margin-top: 8px;
 	}
 
+	span {
+		color: var(--FG_5);
+	}
+
 	&._small {
 		@extend .text_13;
 	}
