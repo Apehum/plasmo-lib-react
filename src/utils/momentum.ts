@@ -97,7 +97,7 @@ export class Momentum {
 		return dateTime > nowTime ? dateTime - nowTime : 0;
 	}
 
-	endOf(date: Date): string {
+	endOf(date: Date, seconds: boolean = true): string {
 		const now = new Date();
 		const nowTime = Math.round(now.getTime() / 1000);
 		const dateTime = Math.round(date.getTime() / 1000);
@@ -105,10 +105,16 @@ export class Momentum {
 		const duration = dateTime > nowTime ? dateTime - nowTime : 0;
 		if(duration === 0) {
 			return "";
-		} else if (duration < 60) {
+		} else if (duration < 60 && seconds) {
 			return `${this.language.few} ${this.language.secondsAgo[2]}`;
 		} else if (duration < 3600) {
-			const minutes = Math.floor(duration / 60);
+			let minutes;
+			if (duration < 60 && !seconds) {
+				minutes = Math.ceil(duration / 60);
+			} else {
+				minutes = Math.floor(duration / 60);
+			}
+
 			return `${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
 				minutes,
 				this.language.minutesAgo,
@@ -146,7 +152,7 @@ export class Momentum {
 		}
 	}
 
-	endOfPrefix(date: Date): string {
+	endOfPrefix(date: Date, seconds: boolean = true): string {
 		const now = new Date();
 		const nowTime = Math.round(now.getTime() / 1000);
 		const dateTime = Math.round(date.getTime() / 1000);
@@ -154,10 +160,16 @@ export class Momentum {
 		const duration = dateTime > nowTime ? dateTime - nowTime : 0;
 		if(duration === 0) {
 			return "";
-		} else if (duration < 60) {
+		} else if (duration < 60 && seconds) {
 			return `${this.language.after} ${this.language.few} ${this.language.secondsAgo[2]}`;
 		} else if (duration < 3600) {
-			const minutes = Math.floor(duration / 60);
+			let minutes;
+			if (duration < 60 && !seconds) {
+				minutes = Math.ceil(duration / 60);
+			} else {
+				minutes = Math.floor(duration / 60);
+			}
+
 			return `${this.language.after} ${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
 				minutes,
 				this.language.minutesAgo,
