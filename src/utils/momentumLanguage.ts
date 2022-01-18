@@ -2,6 +2,7 @@ export type MomentumLanguage = {
 	few: string;
 	after: string;
 	ago: string;
+	today: string;
 	yesterday: string;
 	secondsAgo: Array<string>;
 	minutesAgo: Array<string>;
@@ -18,6 +19,7 @@ momentumLanguages.set("ru", {
 	few: "несколько",
 	after: "через",
 	ago: "назад",
+	today: "сегодня",
 	yesterday: "вчера",
 	secondsAgo: ["секунду", "секунды", "секунд"],
 	minutesAgo: ["минуту", "минуты", "минут"],
