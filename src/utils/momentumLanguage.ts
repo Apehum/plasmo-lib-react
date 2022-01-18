@@ -11,6 +11,7 @@ export type MomentumLanguage = {
 	weeksAgo: Array<string>;
 	monthsAgo: Array<string>;
 	yearsAgo: Array<string>;
+	months: Array<Array<string>>
 };
 
 export const momentumLanguages: Map<String, MomentumLanguage> = new Map();
@@ -28,4 +29,17 @@ momentumLanguages.set("ru", {
 	weeksAgo: ["неделю", "недели", "недель"],
 	monthsAgo: ["месяц", "месяца", "месяцев"],
 	yearsAgo: ["год", "года", "лет"],
+	months: [
+		["январь", "января"],
+		["февраль", "февраля"],
+		["март", "марта"],
+		["апрель", "апреля"],
+		["май", "мая"],
+		["июнь", "июня"],
+		["июль", "июля"],
+		["август", "августа"],
+		["сентябрь", "сентября"],
+		["ноябрь", "ноября"],
+		["декабрь", "декабря"]
+	]
 });
