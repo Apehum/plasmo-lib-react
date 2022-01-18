@@ -110,7 +110,7 @@ export class Momentum {
 		} else if (duration < 3600) {
 			let minutes;
 			if (duration < 60 && !seconds) {
-				minutes = Math.ceil(duration / 60);
+				minutes = 1;
 			} else {
 				minutes = Math.floor(duration / 60);
 			}
@@ -165,7 +165,7 @@ export class Momentum {
 		} else if (duration < 3600) {
 			let minutes;
 			if (duration < 60 && !seconds) {
-				minutes = Math.ceil(duration / 60);
+				minutes = 1;
 			} else {
 				minutes = Math.floor(duration / 60);
 			}
