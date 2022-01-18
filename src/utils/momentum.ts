@@ -50,9 +50,9 @@ export class Momentum {
 		} else if (duration < 172800) {
 			return this.language.yesterday;
 		} else if (now.getFullYear() !== date.getFullYear()) {
-			return `${date.getDate()} ${this.language.months[date.getMonth()]} ${date.getFullYear()}`;
+			return `${date.getDate()} ${this.language.months[date.getMonth()][1]} ${date.getFullYear()}`;
 		} else {
-			return `${date.getDate()} ${this.language.months[date.getMonth()]}`;
+			return `${date.getDate()} ${this.language.months[date.getMonth()][1]}`;
 		}
 	}
 
