@@ -1,6 +1,6 @@
 import { MomentumLanguage, momentumLanguages } from "./momentumLanguage";
 import { formatNumberCases } from "./formatNumberCases";
-import { isBrowser } from "./index";
+import { isBrowser, isToday, isYesterday } from "./index";
 
 // Violence, Speed,
 export class Momentum {
@@ -41,14 +41,9 @@ export class Momentum {
 
 	dateOf(date: Date): string {
 		const now = new Date();
-
-		if (date.getDate() == now.getDate() &&
-			date.getMonth() == now.getMonth() &&
-			date.getFullYear() == now.getFullYear()) {
+		if (isToday(date, now)) {
 			return this.language.today;
-		} else if (date.getDate() == (now.getDate() - 1) &&
-			date.getMonth() == now.getMonth() &&
-			date.getFullYear() == now.getFullYear()) {
+		} else if (isYesterday(date, now)) {
 			return this.language.yesterday;
 		} else if (now.getFullYear() !== date.getFullYear()) {
 			return `${date.getDate()} ${this.language.months[date.getMonth()][1]} ${date.getFullYear()}`;

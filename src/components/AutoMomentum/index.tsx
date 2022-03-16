@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Momentum } from "../../utils/momentum";
-import { firstLetterUpperCase } from "../../utils";
+import { firstLetterUpperCase, isToday, isYesterday } from "../../utils";
 import { clearInterval } from "timers";
 
 type NextDayListener = () => void;
@@ -41,13 +41,17 @@ const Day: React.FC<{
 	);
 
 	useEffect(() => {
-		const callback = () => setAutoMomentum(
-			uppercase
-				? firstLetterUpperCase(momentum.dateOf(date))
-				: momentum.dateOf(date)
-		);
-		onNextDay(callback);
-		return () => removeOnNextDay(callback);
+		if (isToday(date) || isYesterday(date)) {
+			const callback = () => setAutoMomentum(
+				uppercase
+					? firstLetterUpperCase(momentum.dateOf(date))
+					: momentum.dateOf(date)
+			);
+			onNextDay(callback);
+			return () => removeOnNextDay(callback);
+		}
+
+		return;
 	}, []);
 
 	return <React.Fragment>{autoMomentum}</React.Fragment>;
