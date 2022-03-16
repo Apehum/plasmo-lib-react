@@ -15,6 +15,6 @@ export { default as Container } from "./components/Container";
 export { default as Row } from "./components/Row";
 
 /* Utils */
-export { default } from "./utils";
+export { isBrowser, firstLetterUpperCase } from "./utils";
 export { Momentum } from "./utils/momentum";
 export { formatNumberCases } from "./utils/formatNumberCases";
