@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Momentum } from "../../utils/momentum";
 import { firstLetterUpperCase } from "../../utils";
-
-type PropsStart = {
-	date: Date;
-};
+import { clearInterval } from "timers";
 
 type NextDayListener = () => void;
 
@@ -54,11 +51,13 @@ const Day: React.FC<{
 	}, []);
 
 	return <React.Fragment>{autoMomentum}</React.Fragment>;
-}
+};
 
-const Start = ({ date }: PropsStart) => {
+const Start: React.FC<{
+	date: Date;
+}> = ({ date }) => {
 	const [autoMomentum, setAutoMomentum] = useState(momentum.startOf(date));
-	let interval: NodeJS.Timeout;
+	const interval = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
 		const calculateInterval = () => {
@@ -66,25 +65,25 @@ const Start = ({ date }: PropsStart) => {
 
 			if (duration < 86400) {
 				if (duration < 60) {
-					interval = setInterval(() => {
+					interval.current = setInterval(() => {
 						setAutoMomentum(momentum.startOf(date));
 
 						if (momentum.startOfDuration(date) > 60) {
-							clearInterval(interval);
+							if (interval.current) clearInterval(interval.current);
 							calculateInterval();
 						}
 					}, 1000);
 				} else if (duration < 3600) {
-					interval = setInterval(() => {
+					interval.current = setInterval(() => {
 						setAutoMomentum(momentum.startOf(date));
 
 						if (momentum.startOfDuration(date) > 3600) {
-							clearInterval(interval);
+							if (interval.current) clearInterval(interval.current);
 							calculateInterval();
 						}
 					}, 60000);
 				} else {
-					interval = setInterval(() => {
+					interval.current = setInterval(() => {
 						setAutoMomentum(momentum.startOf(date));
 					}, 3600000);
 				}
@@ -94,25 +93,21 @@ const Start = ({ date }: PropsStart) => {
 		calculateInterval();
 
 		return () => {
-			if (interval) {
-				clearInterval(interval);
-			}
+			if (interval.current) clearInterval(interval.current);
 		};
 	}, [date]);
 
 	return <React.Fragment>{autoMomentum}</React.Fragment>;
 };
 
-type PropsEnd = {
+const End: React.FC<{
 	date: Date;
 	seconds?: boolean;
 	prefix?: boolean;
 	onEnd?: () => void;
-};
-
-const End = ({ date, onEnd, prefix = true, seconds = true }: PropsEnd) => {
+}> = ({ date, onEnd, prefix = true, seconds = true }) => {
 	const [autoMomentum, setAutoMomentum] = useState(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
-	let interval: NodeJS.Timeout;
+	const interval = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
 		const calculateInterval = () => {
@@ -120,30 +115,28 @@ const End = ({ date, onEnd, prefix = true, seconds = true }: PropsEnd) => {
 
 			if (duration < 86400) {
 				if (duration <= 60) {
-					interval = setInterval(() => {
+					interval.current = setInterval(() => {
 						if(momentum.endOfDuration(date) === 0) {
-							if(onEnd) {
-								onEnd();
-							}
+							if(onEnd) onEnd();
 							setAutoMomentum("");
-							clearInterval(interval);
+							if (interval.current) clearInterval(interval.current);
 						}
 						setAutoMomentum(prefix ? momentum.endOfPrefix(date, seconds) : momentum.endOf(date, seconds));
 					}, 1000);
 				} else if (duration < 3600) {
-					interval = setInterval(() => {
+					interval.current = setInterval(() => {
 						setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
 
 						if (momentum.endOfDuration(date) <= 60) {
-							clearInterval(interval);
+							if (interval.current) clearInterval(interval.current);
 							calculateInterval();
 						}
 					}, 60000);
 				} else {
-					interval = setInterval(() => {
+					interval.current = setInterval(() => {
 						setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
 						if (momentum.endOfDuration(date) <= 3600) {
-							clearInterval(interval);
+							if (interval.current) clearInterval(interval.current);
 							calculateInterval();
 						}
 					}, 3600000);
@@ -154,9 +147,7 @@ const End = ({ date, onEnd, prefix = true, seconds = true }: PropsEnd) => {
 		calculateInterval();
 
 		return () => {
-			if (interval) {
-				clearInterval(interval);
-			}
+			if (interval.current) clearInterval(interval.current);
 		};
 	}, [date]);
 
