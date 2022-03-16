@@ -1,7 +1,2 @@
-class Index {
-	isBrowser = () => typeof window !== "undefined";
-}
-
-const utils = new Index();
-
-export default utils;
+export const isBrowser = () => typeof window !== "undefined";
+export const firstLetterUpperCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);

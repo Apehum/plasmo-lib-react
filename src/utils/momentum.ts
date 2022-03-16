@@ -1,6 +1,6 @@
 import { MomentumLanguage, momentumLanguages } from "./momentumLanguage";
 import { formatNumberCases } from "./formatNumberCases";
-import utils from "./index";
+import { isBrowser } from "./index";
 
 // Violence, Speed,
 export class Momentum {
@@ -16,7 +16,7 @@ export class Momentum {
 		}
 
 		// next.js fix
-		if (utils.isBrowser()) {
+		if (isBrowser()) {
 			if (navigator) {
 				// @ts-ignore
 				const userLang = navigator.language || navigator.userLanguage;

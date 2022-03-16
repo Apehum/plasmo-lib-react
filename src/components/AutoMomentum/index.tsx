@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Momentum } from "../../utils/momentum";
+import { firstLetterUpperCase } from "../../utils";
 
 type PropsStart = {
 	date: Date;
@@ -32,11 +33,22 @@ const onNextDay = (callback: NextDayListener) => {
 	}
 };
 
-const Day = ({ date }: PropsStart) => {
-	const [autoMomentum, setAutoMomentum] = useState(momentum.dateOf(date));
+const Day: React.FC<{
+	date: Date;
+	uppercase?: boolean;
+}> = ({ date, uppercase }) => {
+	const [autoMomentum, setAutoMomentum] = useState(
+		uppercase
+			? firstLetterUpperCase(momentum.dateOf(date))
+			: momentum.dateOf(date)
+	);
 
 	useEffect(() => {
-		const callback = () => setAutoMomentum(momentum.dateOf(date));
+		const callback = () => setAutoMomentum(
+			uppercase
+				? firstLetterUpperCase(momentum.dateOf(date))
+				: momentum.dateOf(date)
+		);
 		onNextDay(callback);
 		return () => removeOnNextDay(callback);
 	}, []);
