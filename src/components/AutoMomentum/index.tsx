@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Momentum } from "../../utils/momentum";
 import { firstLetterUpperCase, isToday, isYesterday } from "../../utils";
-import { clearInterval } from "timers";
 
 type NextDayListener = () => void;
 
@@ -11,23 +10,25 @@ let nextDayTimeout: NodeJS.Timeout | undefined;
 
 const removeOnNextDay = (callback: NextDayListener) => {
 	nextDayListeners = nextDayListeners.filter(cb => cb !== callback);
-	if (nextDayTimeout && nextDayListeners.length === 0) {
+	if (nextDayTimeout && nextDayListeners.length === 0)
 		clearTimeout(nextDayTimeout);
-	}
 };
 
 const onNextDay = (callback: NextDayListener) => {
 	nextDayListeners.push(callback);
-	if (!nextDayTimeout) {
-		const now = new Date();
+	if (!nextDayTimeout) updateNextDayTimeout();
+};
 
-		const midnight = new Date();
-		midnight.setHours(24, 0, 0, 0);
+const updateNextDayTimeout = () => {
+	const now = new Date();
 
-		nextDayTimeout = setTimeout(() => {
-			nextDayListeners.forEach(listener => listener());
-		}, midnight.getTime() - now.getTime());
-	}
+	const midnight = new Date();
+	midnight.setHours(24, 0, 0, 0);
+
+	nextDayTimeout = setTimeout(() => {
+		nextDayListeners.forEach(listener => listener());
+		updateNextDayTimeout();
+	}, midnight.getTime() - now.getTime());
 };
 
 const Day: React.FC<{
