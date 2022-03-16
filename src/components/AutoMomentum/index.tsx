@@ -25,7 +25,7 @@ const onNextDay = (callback: NextDayListener) => {
 		midnight.setHours(24, 0, 0, 0);
 
 		nextDayTimeout = setTimeout(() => {
-
+			nextDayListeners.forEach(listener => listener());
 		}, midnight.getTime() - now.getTime());
 	}
 };
