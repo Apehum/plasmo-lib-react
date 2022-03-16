@@ -41,13 +41,14 @@ export class Momentum {
 
 	dateOf(date: Date): string {
 		const now = new Date();
-		const nowTime = Math.round(now.getTime() / 1000);
-		const dateTime = Math.round(date.getTime() / 1000);
 
-		const duration = nowTime - dateTime;
-		if (duration < 86400) {
+		if (date.getDate() == now.getDate() &&
+			date.getMonth() == now.getMonth() &&
+			date.getFullYear() == now.getFullYear()) {
 			return this.language.today;
-		} else if (duration < 172800) {
+		} else if (date.getDate() == (now.getDate() - 1) &&
+			date.getMonth() == now.getMonth() &&
+			date.getFullYear() == now.getFullYear()) {
 			return this.language.yesterday;
 		} else if (now.getFullYear() !== date.getFullYear()) {
 			return `${date.getDate()} ${this.language.months[date.getMonth()][1]} ${date.getFullYear()}`;
