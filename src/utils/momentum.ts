@@ -39,10 +39,12 @@ export class Momentum {
 		return nowTime - dateTime;
 	}
 
-	dateOf(date: Date): string {
+	dateOf(date: Date, time: boolean = false): string {
 		const now = new Date();
 		if (isToday(date, now)) {
-			return this.language.today;
+			return time
+				? (`${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`)
+				: this.language.today;
 		} else if (isYesterday(date, now)) {
 			return this.language.yesterday;
 		} else if (now.getFullYear() !== date.getFullYear()) {

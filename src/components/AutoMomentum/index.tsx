@@ -34,19 +34,20 @@ const updateNextDayTimeout = () => {
 const Day: React.FC<{
 	date: Date;
 	uppercase?: boolean;
-}> = ({ date, uppercase }) => {
+	time?: boolean;
+}> = ({ date, uppercase, time }) => {
 	const [autoMomentum, setAutoMomentum] = useState(
 		uppercase
-			? firstLetterUpperCase(momentum.dateOf(date))
-			: momentum.dateOf(date)
+			? firstLetterUpperCase(momentum.dateOf(date, time))
+			: momentum.dateOf(date, time)
 	);
 
 	useEffect(() => {
 		if (isToday(date) || isYesterday(date)) {
 			const callback = () => setAutoMomentum(
 				uppercase
-					? firstLetterUpperCase(momentum.dateOf(date))
-					: momentum.dateOf(date)
+					? firstLetterUpperCase(momentum.dateOf(date, time))
+					: momentum.dateOf(date, time)
 			);
 			onNextDay(callback);
 			return () => removeOnNextDay(callback);
