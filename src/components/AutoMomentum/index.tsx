@@ -42,17 +42,28 @@ const Day: React.FC<{
 			: momentum.dateOf(date, time)
 	);
 
+	const callback = useRef<NextDayListener>();
 	const [autoMomentum, setAutoMomentum] = useState(calculateValue());
 
-	useEffect(() => {
+	const setupCallback = () => {
 		if (isToday(date) || isYesterday(date)) {
-			const callback = () => setAutoMomentum(calculateValue());
-			onNextDay(callback);
-			return () => removeOnNextDay(callback);
+			callback.current = () => setAutoMomentum(calculateValue());
+			onNextDay(callback.current);
 		}
+	};
 
-		return;
+	useEffect(() => {
+		setAutoMomentum(calculateValue());
+		setupCallback();
 	}, [date]);
+
+	useEffect(() => {
+		setupCallback();
+
+		return () => {
+			if (callback.current) removeOnNextDay(callback.current);
+		};
+	}, []);
 
 	return <React.Fragment>{autoMomentum}</React.Fragment>;
 };
@@ -64,6 +75,8 @@ const Start: React.FC<{
 	const interval = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
+		setAutoMomentum(momentum.startOf(date));
+
 		const calculateInterval = () => {
 			const duration = momentum.startOfDuration(date);
 
@@ -114,6 +127,8 @@ const End: React.FC<{
 	const interval = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
+		setAutoMomentum(momentum.startOf(date));
+
 		const calculateInterval = () => {
 			const duration = momentum.endOfDuration(date);
 
