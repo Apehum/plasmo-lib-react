@@ -36,25 +36,23 @@ const Day: React.FC<{
 	uppercase?: boolean;
 	time?: boolean;
 }> = ({ date, uppercase, time }) => {
-	const [autoMomentum, setAutoMomentum] = useState(
+	const calculateValue = () => (
 		uppercase
 			? firstLetterUpperCase(momentum.dateOf(date, time))
 			: momentum.dateOf(date, time)
 	);
 
+	const [autoMomentum, setAutoMomentum] = useState(calculateValue());
+
 	useEffect(() => {
 		if (isToday(date) || isYesterday(date)) {
-			const callback = () => setAutoMomentum(
-				uppercase
-					? firstLetterUpperCase(momentum.dateOf(date, time))
-					: momentum.dateOf(date, time)
-			);
+			const callback = () => setAutoMomentum(calculateValue());
 			onNextDay(callback);
 			return () => removeOnNextDay(callback);
 		}
 
 		return;
-	}, []);
+	}, [date]);
 
 	return <React.Fragment>{autoMomentum}</React.Fragment>;
 };
