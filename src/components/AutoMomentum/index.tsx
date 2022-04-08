@@ -123,11 +123,16 @@ const End: React.FC<{
 	prefix?: boolean;
 	onEnd?: () => void;
 }> = ({ date, onEnd, prefix = true, seconds = true }) => {
-	const [autoMomentum, setAutoMomentum] = useState(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
+	const [autoMomentum, setAutoMomentum1] = useState(prefix ? momentum.endOfPrefix(date, seconds) : momentum.endOf(date, seconds));
+	const setAutoMomentum = (date: Date | "") => setAutoMomentum1(
+		date === ""
+			? ""
+			: prefix ? momentum.endOfPrefix(date, seconds) : momentum.endOf(date, seconds)
+	);
 	const interval = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
-		setAutoMomentum(momentum.startOf(date));
+		setAutoMomentum(date);
 
 		const calculateInterval = () => {
 			const duration = momentum.endOfDuration(date);
@@ -140,11 +145,11 @@ const End: React.FC<{
 							setAutoMomentum("");
 							if (interval.current) clearInterval(interval.current);
 						}
-						setAutoMomentum(prefix ? momentum.endOfPrefix(date, seconds) : momentum.endOf(date, seconds));
+						setAutoMomentum(date);
 					}, 1000);
 				} else if (duration < 3600) {
 					interval.current = setInterval(() => {
-						setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
+						setAutoMomentum(date);
 
 						if (momentum.endOfDuration(date) <= 60) {
 							if (interval.current) clearInterval(interval.current);
@@ -153,7 +158,7 @@ const End: React.FC<{
 					}, 60000);
 				} else {
 					interval.current = setInterval(() => {
-						setAutoMomentum(prefix ? momentum.endOfPrefix(date) : momentum.endOf(date));
+						setAutoMomentum(date);
 						if (momentum.endOfDuration(date) <= 3600) {
 							if (interval.current) clearInterval(interval.current);
 							calculateInterval();
