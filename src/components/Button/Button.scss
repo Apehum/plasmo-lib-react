@@ -74,7 +74,7 @@
 	@extend .button_main;
 	background-color: transparent;
 	color: var(--TC_5);
-	border: 1px solid transparent;
+	border: 1px solid var(--TC_5);
 
 	&:hover {
 		color: var(--FG_0);
