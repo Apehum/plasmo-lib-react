@@ -15,6 +15,14 @@
 		color: var(--FG_5);
 	}
 
+	a {
+		color: var(--TC_5);
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
 	&._small {
 		@extend .text_13;
 	}
