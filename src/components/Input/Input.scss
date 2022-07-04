@@ -40,4 +40,5 @@
 
 .textarea {
 	@extend .input;
+	resize: none;
 }
