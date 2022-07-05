@@ -3,6 +3,7 @@ import "./InputGroup.scss";
 
 type Props = {
 	error?: boolean;
+	removeErrorOnChange?: boolean;
 	disabled?: boolean;
 	readOnly?: boolean
 	className?: string;
@@ -21,12 +22,13 @@ const InputGroup: FunctionComponent<Props> = ({
 	error,
 	disabled,
 	readOnly,
+	removeErrorOnChange = true,
 }) => {
 	const [err, setError] = useState(error || false);
 	const [rOnly, setReadOnly] = useState(error || false);
 
 	useEffect(() => {
-		setError(!!error)
+		setError(!!error);
 	}, [error]);
 
 	useEffect(() => {
@@ -42,7 +44,7 @@ const InputGroup: FunctionComponent<Props> = ({
 			<TestContext.Provider
 				value={{
 					groupOnChange: (value) => {
-						if(value) {
+						if (removeErrorOnChange && value) {
 							setError(false);
 						}
 					},
