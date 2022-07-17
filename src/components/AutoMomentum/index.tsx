@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Momentum } from "../../utils/momentum";
+import { LanguageVariant, Momentum } from "../../utils/momentum";
 import { firstLetterUpperCase, isToday, isYesterday } from "../../utils";
 
 type NextDayListener = () => void;
@@ -70,12 +70,13 @@ const Day: React.FC<{
 
 const Start: React.FC<{
 	date: Date;
-}> = ({ date }) => {
+	variant?: LanguageVariant;
+}> = ({ date, variant = LanguageVariant.SECOND }) => {
 	const [autoMomentum, setAutoMomentum] = useState(momentum.startOf(date));
 	const interval = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
-		setAutoMomentum(momentum.startOf(date));
+		setAutoMomentum(momentum.startOf(date, variant));
 
 		const calculateInterval = () => {
 			const duration = momentum.startOfDuration(date);
@@ -83,7 +84,7 @@ const Start: React.FC<{
 			if (duration < 86400) {
 				if (duration < 60) {
 					interval.current = setInterval(() => {
-						setAutoMomentum(momentum.startOf(date));
+						setAutoMomentum(momentum.startOf(date, variant));
 
 						if (momentum.startOfDuration(date) > 60) {
 							if (interval.current) clearInterval(interval.current);
@@ -92,7 +93,7 @@ const Start: React.FC<{
 					}, 1000);
 				} else if (duration < 3600) {
 					interval.current = setInterval(() => {
-						setAutoMomentum(momentum.startOf(date));
+						setAutoMomentum(momentum.startOf(date, variant));
 
 						if (momentum.startOfDuration(date) > 3600) {
 							if (interval.current) clearInterval(interval.current);
@@ -101,7 +102,7 @@ const Start: React.FC<{
 					}, 60000);
 				} else {
 					interval.current = setInterval(() => {
-						setAutoMomentum(momentum.startOf(date));
+						setAutoMomentum(momentum.startOf(date, variant));
 					}, 3600000);
 				}
 			}
@@ -122,12 +123,13 @@ const End: React.FC<{
 	seconds?: boolean;
 	prefix?: boolean;
 	onEnd?: () => void;
-}> = ({ date, onEnd, prefix = true, seconds = true }) => {
-	const [autoMomentum, setAutoMomentum1] = useState(prefix ? momentum.endOfPrefix(date, seconds) : momentum.endOf(date, seconds));
+	variant?: LanguageVariant;
+}> = ({ date, onEnd, prefix = true, seconds = true, variant = LanguageVariant.SECOND }) => {
+	const [autoMomentum, setAutoMomentum1] = useState(prefix ? momentum.endOfPrefix(date, seconds, variant) : momentum.endOf(date, seconds, variant));
 	const setAutoMomentum = (date: Date | "") => setAutoMomentum1(
 		date === ""
 			? ""
-			: prefix ? momentum.endOfPrefix(date, seconds) : momentum.endOf(date, seconds)
+			: prefix ? momentum.endOfPrefix(date, seconds, variant) : momentum.endOf(date, seconds, variant)
 	);
 	const interval = useRef<NodeJS.Timeout>();
 

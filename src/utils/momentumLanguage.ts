@@ -4,11 +4,14 @@ export type MomentumLanguage = {
 	ago: string;
 	today: string;
 	yesterday: string;
-	secondsAgo: Array<string>;
-	minutesAgo: Array<string>;
+	secondsAgo1: Array<string>;
+	secondsAgo2: Array<string>;
+	minutesAgo1: Array<string>;
+	minutesAgo2: Array<string>;
 	hoursAgo: Array<string>;
 	daysAgo: Array<string>;
-	weeksAgo: Array<string>;
+	weeksAgo1: Array<string>;
+	weeksAgo2: Array<string>;
 	monthsAgo: Array<string>;
 	yearsAgo: Array<string>;
 	months: Array<Array<string>>
@@ -22,11 +25,14 @@ momentumLanguages.set("ru", {
 	ago: "назад",
 	today: "сегодня",
 	yesterday: "вчера",
-	secondsAgo: ["секунду", "секунды", "секунд"],
-	minutesAgo: ["минуту", "минуты", "минут"],
+	secondsAgo1: ["секунда", "секунды", "секунд"], // осталась
+	secondsAgo2: ["секунду", "секунды", "секунд"], // через
+	minutesAgo1: ["минута", "минуты", "минут"], // осталась
+	minutesAgo2: ["минуту", "минуты", "минут"], // через
 	hoursAgo: ["час", "часа", "часов"],
 	daysAgo: ["день", "дня", "дней"],
-	weeksAgo: ["неделя", "недели", "недель"],
+	weeksAgo1: ["неделя", "недели", "недель"], // осталась
+	weeksAgo2: ["неделю", "недели", "недель"], // через
 	monthsAgo: ["месяц", "месяца", "месяцев"],
 	yearsAgo: ["год", "года", "лет"],
 	months: [

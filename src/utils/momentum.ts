@@ -2,6 +2,11 @@ import { MomentumLanguage, momentumLanguages } from "./momentumLanguage";
 import { formatNumberCases } from "./formatNumberCases";
 import { isBrowser, isToday, isYesterday } from "./index";
 
+export enum LanguageVariant {
+	FIRST = 1,
+	SECOND = 2,
+}
+
 // Violence, Speed,
 export class Momentum {
 	// forsenCd
@@ -54,19 +59,19 @@ export class Momentum {
 		}
 	}
 
-	startOf(date: Date): string {
+	startOf(date: Date, variant: LanguageVariant = LanguageVariant.SECOND): string {
 		const now = new Date();
 		const nowTime = Math.round(now.getTime() / 1000);
 		const dateTime = Math.round(date.getTime() / 1000);
 
 		const duration = nowTime - dateTime;
 		if (duration < 60) {
-			return `${this.language.few} ${this.language.secondsAgo[2]} ${this.language.ago}`;
+			return `${this.language.few} ${this.language["secondsAgo" + variant][2]} ${this.language.ago}`;
 		} else if (duration < 3600) {
 			const minutes = Math.floor(duration / 60);
 			return `${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
 				minutes,
-				this.language.minutesAgo,
+				this.language["minutesAgo" + variant],
 			)} ${this.language.ago}`;
 		} else if (duration < 86400) {
 			const hours = Math.floor(duration / 3600);
@@ -88,7 +93,7 @@ export class Momentum {
 			const weeks = Math.floor(duration / 604800);
 			return `${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
 				weeks,
-				this.language.weeksAgo,
+				this.language["weeksAgo" + variant],
 			)} ${this.language.ago}`;
 		} else if (duration < 31536000) {
 			const weeks = Math.floor(duration / 2592000);
@@ -112,7 +117,7 @@ export class Momentum {
 		return dateTime > nowTime ? dateTime - nowTime : 0;
 	}
 
-	endOf(date: Date, seconds: boolean = true): string {
+	endOf(date: Date, seconds: boolean = true, variant: LanguageVariant = LanguageVariant.SECOND): string {
 		const now = new Date();
 		const nowTime = Math.round(now.getTime() / 1000);
 		const dateTime = Math.round(date.getTime() / 1000);
@@ -121,7 +126,7 @@ export class Momentum {
 		if(duration === 0) {
 			return "";
 		} else if (duration < 60 && seconds) {
-			return `${this.language.few} ${this.language.secondsAgo[2]}`;
+			return `${this.language.few} ${this.language["secondsAgo" + variant][2]}`;
 		} else if (duration < 3600) {
 			let minutes;
 			if (duration < 60 && !seconds) {
@@ -132,7 +137,7 @@ export class Momentum {
 
 			return `${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
 				minutes,
-				this.language.minutesAgo,
+				this.language["minutesAgo" + variant],
 			)}`;
 		} else if (duration < 86400) {
 			const hours = Math.floor(duration / 3600);
@@ -150,7 +155,7 @@ export class Momentum {
 			const weeks = Math.floor(duration / 604800);
 			return `${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
 				weeks,
-				this.language.weeksAgo,
+				this.language["weeksAgo" + variant],
 			)}`;
 		} else if (duration < 31536000) {
 			const weeks = Math.floor(duration / 2592000);
@@ -167,7 +172,7 @@ export class Momentum {
 		}
 	}
 
-	endOfPrefix(date: Date, seconds: boolean = true): string {
+	endOfPrefix(date: Date, seconds: boolean = true, variant: LanguageVariant = LanguageVariant.SECOND): string {
 		const now = new Date();
 		const nowTime = Math.round(now.getTime() / 1000);
 		const dateTime = Math.round(date.getTime() / 1000);
@@ -176,7 +181,7 @@ export class Momentum {
 		if(duration === 0) {
 			return "";
 		} else if (duration < 60 && seconds) {
-			return `${this.language.after} ${this.language.few} ${this.language.secondsAgo[2]}`;
+			return `${this.language.after} ${this.language.few} ${this.language["secondsAgo" + variant][2]}`;
 		} else if (duration < 3600) {
 			let minutes;
 			if (duration < 60 && !seconds) {
@@ -187,7 +192,7 @@ export class Momentum {
 
 			return `${this.language.after} ${minutes > 1 ? `${minutes} ` : ""}${formatNumberCases(
 				minutes,
-				this.language.minutesAgo,
+				this.language["minutesAgo" + variant],
 			)}`;
 		} else if (duration < 86400) {
 			const hours = Math.floor(duration / 3600);
@@ -205,7 +210,7 @@ export class Momentum {
 			const weeks = Math.floor(duration / 604800);
 			return `${this.language.after} ${weeks > 1 ? `${weeks} ` : ""}${formatNumberCases(
 				weeks,
-				this.language.weeksAgo,
+				this.language["weeksAgo" + variant],
 			)}`;
 		} else if (duration < 31536000) {
 			const weeks = Math.floor(duration / 2592000);
