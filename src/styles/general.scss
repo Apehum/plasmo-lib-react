@@ -1,26 +1,17 @@
+@import "theme";
+
 :root {
-	--BG_0: #FFFFFF;
-	--BG_1: #EBEDF0;
-	--BG_2: #D7D9DB;
-	--BG_8: #2D2D2E;
-	--BG_9: #1E1E1F;
+	@include light-theme;
+}
 
-	--FG_0: #FFFFFF;
+html:not(._light) {
+	@media (prefers-color-scheme: dark) {
+		@include dark-theme;
+	}
+}
 
-	--FG_3: #C1C2C4;
-
-	--FG_5: #79797A;
-	--FG_6: #5F6061;
-	--FG_7: #464747;
-	--FG_9: #1E1E1F;
-
-	--TC_5: #186EF0;
-	--TC_6: #1562D6;
-	--TC_7: #1357BD;
-
-	--RED: #EB3F2F;
-	--YEL: #F2C037;
-	--GRN: #2BD948;
+html._dark {
+	@include dark-theme;
 }
 
 // Inter
