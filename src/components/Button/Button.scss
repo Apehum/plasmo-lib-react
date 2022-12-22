@@ -6,6 +6,10 @@
 	cursor: pointer;
 	user-select: none;
 
+	& > * {
+		color: inherit;
+	}
+
 	&._icons {
 		display: inline-flex;
 		align-items: center;
