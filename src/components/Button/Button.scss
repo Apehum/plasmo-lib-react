@@ -74,6 +74,28 @@
 	}
 }
 
+.button_main_inverted {
+	@extend .button_main;
+	background-color: var(--BG_0);
+	color: var(--TC_5);
+	border: 1px solid var(--BG_0);
+
+	&:hover {
+		background-color: var(--BG_1);
+		border-color: var(--BG_1);
+	}
+
+	&:active {
+		background-color: var(--BG_2);
+		border-color: var(--BG_2);
+	}
+
+	&:disabled, &._disabled {
+		background-color: var(--BG_0);
+		border-color: var(--BG_0);
+	}
+}
+
 .button_main_alt {
 	@extend .button_main;
 	background-color: transparent;

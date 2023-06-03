@@ -3,19 +3,17 @@ import React, { MouseEventHandler } from "react";
 import "./Button.scss";
 
 export enum ButtonStyle {
-	MAIN,
-	MAIN_ALTERNATIVE,
-	SECONDARY,
+	MAIN = "button_main",
+	MAIN_INVERTED = "button_main_inverted",
+	MAIN_ALTERNATIVE = "button_main_alt",
+	SECONDARY = "button_secondary",
 }
 
 export enum ButtonSize {
-	SMALL,
-	NORMAL,
-	LARGE,
+	SMALL = "button_14",
+	NORMAL = "button_16",
+	LARGE = "button_18",
 }
-
-const styleToCSS = ["button_main", "button_main_alt", "button_secondary"];
-const sizeToCSS = ["button_14", "button_16", "button_18"];
 
 type Props = {
 	style: ButtonStyle;
@@ -29,19 +27,17 @@ type Props = {
 
 const Button: React.FC<Props> = ({
 	style,
-	size,
+	size = ButtonSize.NORMAL,
 	className,
 	onClick,
 	disabled,
 	href,
 	children,
 	icons,
-}) => {
-	size = size === undefined ? ButtonSize.NORMAL : size;
-
-	return (
+}) => (
+	(
 		<a
-			className={`button ${icons ? ` _icons` : ""} ${styleToCSS[style]} ${sizeToCSS[size!]}${
+			className={`button ${icons ? ` _icons` : ""} ${style} ${size}${
 				className ? ` ${className}` : ""
 			}${disabled ? ` _disabled` : ""}`}
 			onClick={!disabled ? onClick : undefined}
@@ -49,7 +45,7 @@ const Button: React.FC<Props> = ({
 		>
 			{children}
 		</a>
-	);
-};
+	)
+)
 
 export default Button;
