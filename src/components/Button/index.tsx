@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { MouseEventHandler } from "react";
+import React from "react";
 import "./Button.scss";
 
 export enum ButtonStyle {
@@ -15,14 +15,11 @@ export enum ButtonSize {
 	LARGE = "button_18",
 }
 
-type Props = {
+type Props = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & {
 	style: ButtonStyle;
 	icons?: boolean;
 	size?: ButtonSize;
-	className?: string;
-	href?: string;
 	disabled?: boolean;
-	onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 const Button: React.FC<Props> = ({
@@ -34,14 +31,16 @@ const Button: React.FC<Props> = ({
 	href,
 	children,
 	icons,
+	...props
 }) => (
 	(
 		<a
-			className={`button ${icons ? ` _icons` : ""} ${style} ${size}${
+			className={`button${icons ? ` _icons` : ""} ${style} ${size}${
 				className ? ` ${className}` : ""
 			}${disabled ? ` _disabled` : ""}`}
 			onClick={!disabled ? onClick : undefined}
 			href={!disabled ? href : undefined}
+			{...props}
 		>
 			{children}
 		</a>
